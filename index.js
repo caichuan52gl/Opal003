@@ -1,11 +1,14 @@
 const express = require("express");
 const multer = require("multer");
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 const fs = require("fs");
 const path = require("path");
 
 const app = express();
 const upload = multer({ dest: "uploads/" });
+
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 // 1. 提取视频最后一帧
 app.post("/extract-last-frame", upload.single("video"), (req, res) => {
